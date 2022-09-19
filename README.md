@@ -1,39 +1,10 @@
-# On this project, We Dockerize a React app. Then push it to AWS Container Registry and we will Host it to AWS Fargate
-
-
-
-## Available Scripts
-
-Make sure that you have the latest version of the AWS CLI and Docker installed. I used AWS cli 2
-
-## Use the AWS CLI:
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin xxxxxxxxxx.dkr.ecr.us-east-1.amazonaws.com
-
-Note: If you receive an error using the AWS CLI, make sure that you have the latest version of the AWS CLI and Docker installed.
-Build your Docker image using the following command. For information on building a Docker file from scratch see the instructions here . You can skip this step if your image is already built:
-docker build -t myapp .
-
-After the build completes, tag your image so you can push the image to this repository:
-docker tag myapp:latest xxxxxxxxxx.dkr.ecr.us-east-1.amazonaws.com/myapp:latest
-
-Run the following command to push this image to your newly created AWS repository:
-docker push xxxxxxxxx.dkr.ecr.us-east-1.amazonaws.com/myapp:latest
-
-
 ### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-
-
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
@@ -43,44 +14,48 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `docker build -t name_of_image_you_want_to_give`
 
-### `npm run eject`
+To build a new Docker image.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### `docker run -p port_number_you_want_to_run_image_on name_of_image_you_want_to_run`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To run a docker image
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### `docker login`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+command: docker login
 
-## Learn More
+### `docker tag tag_name_you_want_to_give docker_hub_username/docker_image_name_you_want_to_push`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Before pushing a new image to the hub, you need to give a tag to the image
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### `docker push docker_hub_username/docker_image_name_you_want_to_push`
 
-### Code Splitting
+To push a new image to the docker hub
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### `docker pull docker_hub_username/docker_image_name_you_want_to_pull`
 
-### Analyzing the Bundle Size
+To pull an image from docker hub
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+# Steps to deploy an image to aws ec2 instance:
 
-### Making a Progressive Web App
+### `sudo yum install docker`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+To install docker on ec2 instance
 
-### Advanced Configuration
+### `sudo systemctl start docker`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+To start docker
 
-### Deployment
+### `docker login`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+TO login into docker
 
-### `npm run build` fails to minify
+### `docker pull docker_hub_username/docker_image_name_you_want_to_pull`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+To pull an image from docker hub, which you want to deploy
+
+### `docker run -d -p 80:80 name_of_image_you_want_to_run`
+
+To run a docker image
