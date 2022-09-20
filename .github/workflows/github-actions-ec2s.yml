@@ -54,8 +54,8 @@ jobs:
           sudo docker pull ${{ secrets.DOCKER_USER }}/front:latest
       - name: run
         run: |
-          sudo docker run -d -p 80:80 ${{ secrets.DOCKER_USER }}/front:${{ github.sha }}
-          sudo docker run -d -p 80:80 ${{ secrets.DOCKER_USER }}/front:latest
+          sudo docker run -d -p 81:80 ${{ secrets.DOCKER_USER }}/front:${{ github.sha }}
+          sudo docker run -d -p 81:80 ${{ secrets.DOCKER_USER }}/front:latest
       - name: Deploy to Server 1
         uses: actions/checkout@v1
         env:
