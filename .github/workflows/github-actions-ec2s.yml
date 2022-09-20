@@ -36,7 +36,7 @@ jobs:
           docker tag front ${{ secrets.DOCKER_USER }}/front:latest
       - name: Push
         run: |
-          docker push ${{ secrets.DOCKER_USER }}/front:${{ github.sha }}
+          # docker push ${{ secrets.DOCKER_USER }}/front:${{ github.sha }}
           docker push ${{ secrets.DOCKER_USER }}/front:latestDef
   deploy:
     name: Deploy to EC2 on master branch push
