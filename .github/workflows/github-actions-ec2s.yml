@@ -55,7 +55,7 @@ jobs:
         uses: actions/checkout@v3
         env:
           SSH_PRIVATE_KEY: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCwqSVxzmxsREmvCHIreC+QeWUiQYr8WTpOGxT9dihedpNskni/J0D35l0r77DQ2Tv5RJJR304ea8Pf2sP1vn/uejJzLCuWPjfQcQoCDESks6Ee+G0wE+GfizLMBme/Crc2hQvccuXP23F88MlMJAaGZ0xzN81JVbpgle7L3IyHMWtoGLpnnaZKaA2V/AxQGqrcaE1izXXumLp2A3k2LbELYzZqYkWuAgk9nYvMkYr4Qgq1UgG9h8AQ0sB9dpliL/GgFofC07zEUhu9FHDOHW7M/k9gMz7sYP4n/kry8SGfxsI2gDPoqG6W9E11oRKxMQXGfktIItyg3YA30ebZRNvvEZHR6YuNsnoQcpn50Q+jm06JA3PWN0vOwRff1sDLq+nLqaOYts+puapd7U81D3gM0AB4+6/61TZ2RqcrkN5Wc+nSub1zkyrNdh5VGHXq1tQyQhME7i1CHurboNFdEOqK9Z+knKLG8V03P5jlwFeksw/ANK2LZ/c4xOcWYOK+a10= princy@braincuber.com"
-          REMOTE_HOST: "ec2-50-19-147-89.compute-1.amazonaws.com"
+          REMOTE_HOST: "test.braincuber.com"
           REMOTE_USER: "ec2-user"
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
