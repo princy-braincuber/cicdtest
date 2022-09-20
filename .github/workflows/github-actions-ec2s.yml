@@ -32,7 +32,7 @@ jobs:
         run: docker build -t front .
       - name: Tags
         run: |
-          docker tag front ${{ secrets.DOCKER_USER }}/front:${{ github.sha }}
+          # docker tag front ${{ secrets.DOCKER_USER }}/front:${{ github.sha }}
           docker tag front ${{ secrets.DOCKER_USER }}/front:latest
       - name: Push
         run: |
@@ -47,7 +47,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Deploy to Server 1
-        uses: easingthemes/ssh-deploy@main
+        uses: actions/checkout@v1
         env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
