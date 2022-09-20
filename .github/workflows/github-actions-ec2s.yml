@@ -32,12 +32,12 @@ jobs:
         run: docker build -t front .
       - name: Tags
         run: |
-          # docker tag front ${{ secrets.DOCKER_USER }}/front:${{ github.sha }}
+          docker tag front ${{ secrets.DOCKER_USER }}/front:${{ github.sha }}
           docker tag front ${{ secrets.DOCKER_USER }}/front:latest
       - name: Push
         run: |
-          # docker push ${{ secrets.DOCKER_USER }}/front:${{ github.sha }}
-          docker push ${{ secrets.DOCKER_USER }}/front:latestDef
+          docker push ${{ secrets.DOCKER_USER }}/front:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USER }}/front:latest
   deploy:
     name: Deploy to EC2 on master branch push
     runs-on: ubuntu-latest
