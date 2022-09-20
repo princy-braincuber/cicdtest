@@ -20,6 +20,7 @@ on:
           run: |
             npm install
             npm test
+            
   - job: deploy
       name: Deploy to EC2 on master branch push
       runs-on: ubuntu-latest
