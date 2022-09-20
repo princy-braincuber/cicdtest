@@ -1,4 +1,5 @@
 name: CI/CD
+
 on:
   push:
     branches:
@@ -43,6 +44,15 @@ jobs:
     needs: cd
 
     steps:
+     - name: Deploy to Server 1
+        uses: actions/checkout@v1
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.HOST_DNS }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          TARGET: ${{ secrets.TARGET_DIR }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Checkout the files
         uses: actions/checkout@v2
       - name: Docker login
@@ -55,10 +65,3 @@ jobs:
         run: |
           sudo docker run -d -p 80:80 ${{ secrets.DOCKER_USER }}/front:${{ github.sha }}
           sudo docker run -d -p 8080:80 ${{ secrets.DOCKER_USER }}/front:latest
-      - name: Deploy to Server 1
-        uses: actions/checkout@v1
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          REMOTE_HOST: ${{ secrets.HOST_DNS }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: ${{ secrets.TARGET_DIR }}
